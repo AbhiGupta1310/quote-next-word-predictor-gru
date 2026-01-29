@@ -11,10 +11,10 @@ from keras.preprocessing.sequence import pad_sequences
 # ------------------------------
 @st.cache_resource
 def load_resources():
-    model = load_model("model/quote_generator_model_3.keras")
-    with open("model/tokenizer_3.pkl", "rb") as f:
+    model = load_model("model/quote_generator_model.keras")
+    with open("model/tokenizer.pkl", "rb") as f:
         tokenizer = pickle.load(f)
-    with open("json/model_params_3.json", "r") as f:
+    with open("json/model_params.json", "r") as f:
         model_params = json.load(f)
         max_len = model_params["max_len"]
     return model, tokenizer, max_len
@@ -28,7 +28,7 @@ model, tokenizer, max_len = load_resources()
 reverse_word_index = {v: k for k, v in tokenizer.word_index.items()}
 
 
-def generate_quote(seed_text, next_words=15, temperature=0.8, top_k=50):
+def generate_quote(seed_text, next_words=25, temperature=0.8, top_k=50):
     """
     Generate text with improved quality
 
